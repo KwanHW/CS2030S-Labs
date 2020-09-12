@@ -1,5 +1,4 @@
 public class NormalCab extends Driver {
-
     public NormalCab(String licensePlate, int waitTime) {
         super(licensePlate,waitTime,new Service[]{new JustRide(), new TakeACab()});
     }

@@ -1,4 +1,4 @@
-public class Service {
+public abstract class Service {
     // In cents
     private final int fare; 
     private final int bookingFee;
@@ -16,11 +16,5 @@ public class Service {
         return bookingFee;
     }
     
-    public int computeFare(Request r) {
-        return -1;
-    }
-
-    public boolean isPeakHours(Request r) {
-        return false;
-    }
+    public abstract int computeFare(Request r);
 }

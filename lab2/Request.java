@@ -21,6 +21,10 @@ public class Request {
         return passenger;
     }
 
+    public boolean isPeakHours(){
+        return (600 <= time && time <= 900);
+    }
+
     @Override
     public String toString() {
         return String.format("%dkm for %dpax @ %dhrs",this.distance, this.passenger, this.time);

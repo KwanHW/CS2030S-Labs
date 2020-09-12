@@ -6,16 +6,11 @@ public class JustRide extends Service {
     @Override
     public int computeFare(Request r) {
         int fare = r.getDistance() * this.getFare();
-        if (isPeakHours(r)) {
+        if (r.isPeakHours()) {
             fare += 500;
         }
 
         return fare;
-    }
-
-    @Override
-    public boolean isPeakHours(Request r) {
-        return (600 <= r.getTime() && r.getTime() <= 900);
     }
 
     @Override

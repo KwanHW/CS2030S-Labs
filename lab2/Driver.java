@@ -17,18 +17,6 @@ public class Driver {
         return servicesProvided;
     }
 
-    public Service compareFares(Request r) {
-        Service selected = this.getServicesProvided()[0];
-        for (Service s : this.getServicesProvided()) {
-            // If the fare is cheaper than the selected service 
-            if (s.computeFare(r) < selected.computeFare(r)) {
-                selected = s;
-            }
-        }
-
-        return selected;
-    }
-
     @Override
     public String toString() {
         return String.format("%s (%d mins away)",this.licensePlate,this.waitTime);
