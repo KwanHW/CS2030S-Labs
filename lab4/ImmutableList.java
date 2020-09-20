@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
-import java.util.function.*;
+import java.util.function.Function;
 
 class ImmutableList<T> {
     private final List<T> list;
 
     @SafeVarargs
-    ImmutableList(T ...list) {
+    ImmutableList(T...list) {
         this.list = List.of(list);
     }
 
@@ -69,17 +69,17 @@ class ImmutableList<T> {
         return new ImmutableList<T>(newList);
     }
 
-    public Object[] toArray(){
+    public Object[] toArray() {
         return this.list.toArray();
     }
 
     //Generic method
-    public <T> T[] toArray(T[] t){
+    public <T> T[] toArray(T[] t) {
         // Based on List.toArray(T[] a) documentation
         // Use Exceptions thrown by the toArray()
         try {
             return this.list.toArray(t);
-        } catch(ArrayStoreException e){
+        } catch (ArrayStoreException e) {
             throw new ArrayStoreException("Cannot add element to array as it is the wrong type");
         } catch (NullPointerException e) {
             throw new NullPointerException("Input array cannot be null");
@@ -94,15 +94,18 @@ class ImmutableList<T> {
         return new ImmutableList<T>(filterList);
     }
 
-    // ? super T so that it can possibly be converted to R (if above the hierachy)
-    // EXANPLE: T is String, ? super T allows T to be String and above(to Object) and hence allow it to be converted to R(Integer)
+    /* ? super T so that it can possibly be converted to R (if above the hierachy)
+    EXAMPLE: T is String 
+    ? super T allows T to be String and above(to Object) and 
+    hence allow it to be converted to R(Integer)
+    */
     public <R> ImmutableList<R> map(Function<? super T,? extends R> func) {                       
         List<R> list = List.copyOf(this.list).stream().map(func).collect(Collectors.toList());
         return new ImmutableList<R>(list);                                      
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.list.toString();
     }
 }
