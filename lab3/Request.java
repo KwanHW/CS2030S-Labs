@@ -18,7 +18,7 @@ public class Request {
     }
 
     public int getPassenger() {
-        return passenger;
+        return this.passenger;
     }
 
     public boolean isPeakHours(){
