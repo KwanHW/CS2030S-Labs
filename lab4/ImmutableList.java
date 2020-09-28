@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 class ImmutableList<T> {
     private final List<T> list;
@@ -55,10 +56,6 @@ class ImmutableList<T> {
         }
     } 
 
-    public boolean equals(ImmutableList<T> comp) {
-        return this.list.equals(comp.get());
-    }
-
     public ImmutableList<T> sorted(Comparator<T> comp) {
         if (comp == null) {
             throw new NullPointerException("Comparator is null");
@@ -102,6 +99,18 @@ class ImmutableList<T> {
     public <R> ImmutableList<R> map(Function<? super T,? extends R> func) {                       
         List<R> list = List.copyOf(this.list).stream().map(func).collect(Collectors.toList());
         return new ImmutableList<R>(list);                                      
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ImmutableList<?>) {
+            ImmutableList<?> newList = (ImmutableList<?>)obj;
+            return this.list.equals(newList.get());
+        } else {
+            return false;
+        }
     }
 
     @Override
