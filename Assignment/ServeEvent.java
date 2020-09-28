@@ -2,6 +2,7 @@
  * ServeEvent
  */
 package cs2030.simulator;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class ServeEvent extends Event {
     @Override
     public Event execute() {
         // Update the server's information by updating the time 
-        Server s = this.server.updateAvailableTime(super.getEventTime()+1);
+        Server s = this.server.updateAvailableTime(super.getEventTime() + 1);
         // Set hasWaitingCustomer to false if its true
         if (s.getHasWaitingCustomer()) {
             s = s.toggleWaiting();

@@ -2,6 +2,7 @@
  * Server
  */
 package cs2030.simulator;
+
 public class Server {
     private final int identifier;
     private final boolean isAvailable;

@@ -17,11 +17,11 @@ import cs2030.simulator.LeaveEvent;
 
 public class Main {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         // Initialisation
         Scanner sc = new Scanner(System.in);
 
-        PriorityQueue<Event> simulator = new PriorityQueue<>(new Comparator<Event>(){
+        PriorityQueue<Event> simulator = new PriorityQueue<>(new Comparator<Event>() {
             public int compare(Event o1, Event o2) {
                 if (o1.getEventTime() == o2.getEventTime()) {
                     if (o1.getCustomer().getId() < o2.getCustomer().getId()) {
@@ -43,9 +43,9 @@ public class Main {
         List<Server> serverList = initServers(numOfServers);
         int numOfCustomers = 0;
 
-       int leftCount = 0;
-       double totalWait = 0;
-           
+        int leftCount = 0;
+        double totalWait = 0;
+
 
         // Initialises the Customers
         while (sc.hasNextDouble()) {
@@ -57,7 +57,7 @@ public class Main {
         }
 
         // Loops through the queue
-        while (!simulator.isEmpty()){
+        while (!simulator.isEmpty()) {
             Event e = simulator.poll();
             System.out.println(e);
             e = e.updateServerList(serverList);
@@ -66,9 +66,9 @@ public class Main {
                 serverList = e.getServerList();
                 continue;
             } else {
-                    e = e.execute();
-                    serverList = e.getServerList();
-                    simulator.add(e);
+                e = e.execute();
+                serverList = e.getServerList();
+                simulator.add(e);
             }
 
             // Statistics
@@ -90,7 +90,7 @@ public class Main {
     public static List<Server> initServers(int numOfServers) {
         ArrayList<Server> serverList = new ArrayList<>(numOfServers);
         for (int i = 0; i < numOfServers; i++) {
-            Server server = new Server(i+1,true,false,0);
+            Server server = new Server(i + 1,true,false,0);
             serverList.add(server); 
         }
         return serverList;

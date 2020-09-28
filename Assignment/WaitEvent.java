@@ -2,6 +2,7 @@
  * WaitEvent
  */
 package cs2030.simulator;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -14,11 +15,7 @@ public class WaitEvent extends Event {
     }
     
     public double compareTime(Server server) {
-        if (super.getCustomer().getArrivalTime() > server.getNextAvailableTime()) {
-            return super.getCustomer().getArrivalTime(); 
-        } else {
-            return server.getNextAvailableTime();
-        }
+        return server.getNextAvailableTime();
     }
 
     @Override

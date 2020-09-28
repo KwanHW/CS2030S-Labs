@@ -1,12 +1,14 @@
 /**
  * ArriveEvent
  */
+
 package cs2030.simulator;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArriveEvent extends Event {
-    public ArriveEvent(Customer customer, List<Server> serverList) {
+    public ArriveEvent(cs2030.simulator.Customer customer, List<Server> serverList) {
         super(customer,serverList);
     }
 
@@ -29,7 +31,7 @@ public class ArriveEvent extends Event {
             if (s.getIsAvailable()) {
                 // Update the availability of the Server
                 s = s.toggleAvailability();
-                return new ServeEvent(super.getCustomer(),super.updateServer(s),s,compareTime(s));
+                return new cs2030.simulator.ServeEvent(super.getCustomer(),super.updateServer(s),s,compareTime(s));
             }  
         }
 
@@ -40,12 +42,12 @@ public class ArriveEvent extends Event {
             if (!s.getHasWaitingCustomer()) {
                 // Update the server's availability and set hasWaitingCustomer to false (if any)
                 s = s.toggleWaiting();
-                return new WaitEvent(super.getCustomer(),super.updateServer(s),s);
+                return new cs2030.simulator.WaitEvent(super.getCustomer(),super.updateServer(s),s);
             }
         }
 
         // If there all servers are unavailable and busy
-        return new LeaveEvent(super.getCustomer(),this.getServerList());
+        return new cs2030.simulator.LeaveEvent(super.getCustomer(),this.getServerList());
     }
     
     @Override

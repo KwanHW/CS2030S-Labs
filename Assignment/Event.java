@@ -2,13 +2,14 @@
  * Event
  */
 package cs2030.simulator;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public abstract class Event {
     private final Customer customer;
     private final double eventTime;
-    private final List<Server> serverList; //All Events will share the same serverList
+    private final List<Server> serverList; 
 
     public Event(Customer customer,List<Server> serverList) {
         this.customer = customer;
