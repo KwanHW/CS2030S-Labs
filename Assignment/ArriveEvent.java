@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArriveEvent extends Event {
-    public ArriveEvent(cs2030.simulator.Customer customer, List<Server> serverList) {
+    public ArriveEvent(Customer customer, List<Server> serverList) {
         super(customer,serverList);
     }
 
+    /**
+     * Compares the time between the Server's next available time against the customer's arrive time.
+     * @param server The server specified to be compared against the customer
+     * @return The greater value time 
+     */
     public double compareTime(Server server) {
         if (super.getCustomer().getArrivalTime() > server.getNextAvailableTime()) {
             return super.getCustomer().getArrivalTime(); 
@@ -23,6 +28,7 @@ public class ArriveEvent extends Event {
     @Override
     public Event execute() {
         ArrayList<Server> serverList = new ArrayList<>(super.getServerList());
+
         // Priority -> isAvailable first before hasWaitingCustomer
         // Checks if any Servers that are available
         for (int i = 0; i < serverList.size(); i++) {
@@ -31,7 +37,7 @@ public class ArriveEvent extends Event {
             if (s.getIsAvailable()) {
                 // Update the availability of the Server
                 s = s.toggleAvailability();
-                return new cs2030.simulator.ServeEvent(super.getCustomer(),super.updateServer(s),s,compareTime(s));
+                return new ServeEvent(super.getCustomer(),super.updateServer(s),s,compareTime(s));
             }  
         }
 
@@ -42,12 +48,12 @@ public class ArriveEvent extends Event {
             if (!s.getHasWaitingCustomer()) {
                 // Update the server's availability and set hasWaitingCustomer to false (if any)
                 s = s.toggleWaiting();
-                return new cs2030.simulator.WaitEvent(super.getCustomer(),super.updateServer(s),s);
+                return new WaitEvent(super.getCustomer(),super.updateServer(s),s);
             }
         }
 
-        // If there all servers are unavailable and busy
-        return new cs2030.simulator.LeaveEvent(super.getCustomer(),this.getServerList());
+        // All servers are unavailable and busy
+        return new LeaveEvent(super.getCustomer(),this.getServerList());
     }
     
     @Override

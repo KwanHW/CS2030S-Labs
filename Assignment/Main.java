@@ -17,6 +17,13 @@ import cs2030.simulator.LeaveEvent;
 
 public class Main {
 
+    /**
+     * Initalises the simulator and runs the simulation through a {@link PriorityQueue}.
+     * Once completed, the simulation will print out 3 numbers (in order):
+     * 1. Average Waiting Time
+     * 2. Number of customers served
+     * 3. Number of customers left
+    */
     public static void main(String[] args) {
         // Initialisation
         Scanner sc = new Scanner(System.in);
@@ -43,9 +50,9 @@ public class Main {
         List<Server> serverList = initServers(numOfServers);
         int numOfCustomers = 0;
 
+        // To track statistics
         int leftCount = 0;
         double totalWait = 0;
-
 
         // Initialises the Customers
         while (sc.hasNextDouble()) {
@@ -87,6 +94,11 @@ public class Main {
         System.out.println(statMsg);
     }
 
+    /** 
+     * Initialises the server list for the simulator.
+     * @param numOfServers Number of servers speciified to initialisation
+     * @return A list of servers to be used for the simulation
+    */
     public static List<Server> initServers(int numOfServers) {
         ArrayList<Server> serverList = new ArrayList<>(numOfServers);
         for (int i = 0; i < numOfServers; i++) {
