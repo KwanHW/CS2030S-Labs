@@ -3,15 +3,34 @@ public class Lecture extends Lesson {
         super(moduleCode,classID,venueID,instructor,startTime,2);
     }
 
+    public boolean hasOverlap(Lesson lesson) {
+        /*
+        if (super.getEndTime() - lesson.getStartTime() == 1) {
+            return true;
+        } else {  
+            return (lesson instanceof Lecture) ?
+                super.getStartTime() - lesson.getStartTime() == 1:
+                false;
+        }
+        */
+        return (super.getEndTime() - lesson.getStartTime() == 1) ? true :
+                (lesson instanceof Lecture) ? super.getStartTime() - lesson.getStartTime() == 1 :false;
+    }
+
     @Override
     public boolean clashWith(Lesson lesson) {
         if (lesson == this) {
             return true;
+        } 
+        
+        if (super.hasSameVenue(lesson) && super.hasSameStartTime(lesson)) {
+            return true;
         } else if (super.hasSameVenue(lesson)) {
-            //Get the end time of this lesson
-            return lesson.getStartTime() < super.getEndTime();
-        } else {
+            return this.hasOverlap(lesson);
+        } else if (super.hasSameStartTime(lesson)) {
             return super.hasSameModule(lesson);
+        } else {
+            return this.hasOverlap(lesson) && super.hasSameModule(lesson);
         }
     }
 

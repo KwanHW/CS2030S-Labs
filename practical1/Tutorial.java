@@ -7,11 +7,14 @@ public class Tutorial extends Lesson {
     public boolean clashWith(Lesson lesson) {
         if (lesson == this) {
             return true;
-        } else if (super.hasSameModule(lesson) && lesson instanceof Tutorial) {
-            // Can be arrange concurrently if lesson and instructor is different
-            return (super.hasSameVenue(lesson) ||  super.hasSameInstructor(lesson));
+        }
+
+        if (super.hasSameVenue(lesson) && super.hasSameStartTime(lesson)) {
+            return true;
+        } else if (super.hasSameStartTime(lesson)) {
+                return (lesson instanceof Lecture && super.hasSameModule(lesson)) ||  super.hasSameInstructor(lesson);
         } else {
-            return lesson.getStartTime() < super.getEndTime() ;
+            return (lesson instanceof Lecture) ? super.getStartTime() - lesson.getStartTime() == 1: false;
         }
     }
 

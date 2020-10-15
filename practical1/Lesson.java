@@ -55,6 +55,9 @@ public abstract class Lesson {
         return this.venueID == lesson.getVenueID();
     }
 
-    public abstract boolean clashWith(Lesson lesson);
+    public boolean hasSameStartTime(Lesson lesson) {
+        return this.startTime == lesson.getStartTime();
+    }
 
+    public abstract boolean clashWith(Lesson lesson);
 }
