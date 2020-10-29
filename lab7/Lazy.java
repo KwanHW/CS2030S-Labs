@@ -11,25 +11,14 @@ public class Lazy<T extends Comparable<T>> {
     private boolean hasBeenRun;
     private final Supplier<T> supp;
 
-    // TODO: Abstract constructor
-    private Lazy(T value, Supplier<T> supp) {
-        this.value = Optional.of(value);
-        this.supp = () -> value; 
-        this.hasBeenRun = false;
-    }
-
-    private Lazy(T value) {
-        //this(Optional.of(value),() -> value);
-        this.value = Optional.of(value);
-        this.supp = () -> value; 
+    private Lazy(Optional<T> value, Supplier<T> supp) {
+        this.value = value;
+        this.supp = supp;
         this.hasBeenRun = false;
     }
 
     private Lazy(Supplier<T> supp) {
-        //this(Optional.empty(),supp);
-        this.value = Optional.empty();
-        this.supp = supp;
-        this.hasBeenRun = false;
+        this(Optional.empty(),supp);
     }
 
     public T get() {
@@ -43,12 +32,14 @@ public class Lazy<T extends Comparable<T>> {
     }
 
     public static <T extends Comparable<T>> Lazy<T> of(T value) {
-        return new Lazy<>(Objects.requireNonNull(value));
+        return new Lazy<>(Optional.of(value),()->value);
     }
 
     public static <T extends Comparable<T>> Lazy<T> of(Supplier<T> supp) {
         try {
-            return new Lazy<>(Objects.requireNonNull(supp));
+            // If it is null exception will be thrown
+            Optional.of(supp); 
+            return new Lazy<>(supp);
         } catch (Exception e) {
             throw new NoSuchElementException("No value present");
         }
@@ -58,9 +49,8 @@ public class Lazy<T extends Comparable<T>> {
         return new Lazy<U>(() -> f.apply(this.get()));
     }
 
-    // TODO Is eager
     public <U extends Comparable<U>> Lazy<U> flatMap(Function<? super T,? extends Lazy<U>> f) {
-        return f.apply(this.get());
+        return new Lazy<>(()->f.apply(this.get()).get());
     }
 
     // Should NOT be evaluated eagerly
@@ -70,11 +60,11 @@ public class Lazy<T extends Comparable<T>> {
     }
 
     public Lazy<Boolean> test(Predicate<T> pred) { 
-        return new Lazy<>(pred.test(this.get()));
+        return Lazy.of(pred.test(this.get()));
     }
 
     public Lazy<Integer> compareTo(Lazy<T> other) {
-        return new Lazy<>(this.get().compareTo(other.get()));
+        return Lazy.of(this.get().compareTo(other.get()));
     }
 
     @Override
