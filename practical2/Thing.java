@@ -1,8 +1,6 @@
 import java.util.List;
 
-// Possible to think of an enum to use
-// Gonna get majorly downgraded but just try to make good the imp
-public class Thing {
+public abstract class Thing {
     private final List<String> events;
     private final int state;
 
@@ -11,16 +9,15 @@ public class Thing {
         this.state = state;
     }
 
+    public List<String> getEvents() {
+        return this.events;
+    }
+
     public int getState() {
         return this.state;
     }
 
-    public Thing tick() {
-        if (state+1 == events.size()) {
-            return this;
-        }
-        return new Thing(events,state+1);
-    }
+    public abstract Thing tick(); 
 
     @Override
     public String toString() {

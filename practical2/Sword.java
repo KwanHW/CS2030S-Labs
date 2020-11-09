@@ -19,5 +19,22 @@ public class Sword extends Thing {
     public boolean isEquipped() {
         return this.isEquipped;
     }
+
+    public Sword equipSword() {
+        return new Sword(super.getState(),true);
+    }
+
+    public Sword unequipSword() {
+        return new Sword(super.getState(),false);
+    }
+
+    @Override
+    public Thing tick() {
+        if (super.getState()+1 == super.getEvents().size()) {
+            return this;
+        }
+        return new Sword(super.getState()+1);
+    }
+
 }
 
