@@ -94,7 +94,7 @@ public class Shop {
      * Greedily searches for a Server that has the shortest queue. If all
      * servers queues are full, return an empty Optional.
      * @return An Optional describing the server with the shortest queue, or an
-     * empty optional if all servers queues are full.
+     *      empty optional if all servers queues are full.
      */
     public Optional<Server> greedyFind() {
         if (this.serverList.size() == 1) {

@@ -1,0 +1,7 @@
+# This file contains some known seeds that I have found during the Assignment
+4_1 - java Main 2 1 2 4 5 1.0 1.0 0.0
+4_4 - java Main 2 5 10 1000 7.0 1.0
+5_9 - java Main 2 2 1 5 9.0 1.0 1.0 1.0
+6_7 - java Main 2 2 2 3 20 12.0 1.0 1.0 0.0
+6_8 - java Main 2 3 2 10 1000 7.0 1.0 0.0 0.0
+7_8 - java Main 2 3 2 10 1000 7.0 1.0 0.0 0.0 0.5

@@ -57,14 +57,14 @@ public class Main {
                 lambda = Double.valueOf(argsList.get(3));
                 mu = Double.valueOf(argsList.get(4));
                 break;
-                // Queues included in simulator
+            // Queues included in simulator
             case 6:
                 queueLen = Integer.valueOf(argsList.get(2));
                 customers = Integer.valueOf(argsList.get(3));
                 lambda = Double.valueOf(argsList.get(4));
                 mu = Double.valueOf(argsList.get(5));
                 break;
-                // Server rest states included
+            // Server rest states included
             case 8:
                 queueLen = Integer.valueOf(argsList.get(2));
                 customers = Integer.valueOf(argsList.get(3));
@@ -73,7 +73,7 @@ public class Main {
                 rho = Double.valueOf(argsList.get(6));
                 restProb = Double.valueOf(argsList.get(7)); 
                 break;
-                // Self checkout kiosks included
+            // Self checkout kiosks included
             case 9:
             case 10:
                 selfCheckout = Integer.valueOf(argsList.get(2));

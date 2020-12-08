@@ -30,7 +30,6 @@ public class DelayEvent extends Event {
 
             // Find an available SelfCheck
             if (newServer instanceof SelfCheck) {
-                // Not matching variable
                 ArrayList<Server> selfChecks = new ArrayList<>(x.findSelfChecks());
                 Collections.sort(
                         selfChecks,
@@ -43,6 +42,7 @@ public class DelayEvent extends Event {
             }
 
             Shop newShop = x.replace(newServer);
+            // If not available, Delay it
             if (!newServer.isAvailable()) {
                 return Pair.of(newShop,new DelayEvent(
                             customer,
@@ -50,6 +50,7 @@ public class DelayEvent extends Event {
                             newServer));
             } 
 
+            // If available, Serve it
             return Pair.of(newShop,new ServeEvent(
                         customer,
                         time,

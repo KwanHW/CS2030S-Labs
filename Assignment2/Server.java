@@ -81,7 +81,7 @@ public class Server {
      * Gets the first timing in the {@link CustomerQ}. If the queue is empty,
      * return the next available time instead.
      * @return The first timing of the queue or the next available time of the
-     * server (if the queue is empty).
+     *      server (if the queue is empty).
      */
     public double getFirstQueue() {
         return this.isQueueEmpty() ? 
